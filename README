@@ -1,0 +1,22 @@
+Run: 
+    ignite chain serve
+
+Send a message to another wallet address:
+    chatd tx chat send [recipient] [content] [flags]
+    ex. chatd tx chat send cosmos14mh0kfh76ap2sh9rfrq7nhhsr0m2m0ff3ahzu7 'Hello' --from bob
+
+List all messages sent to user's wallet address:
+    chatd query chat show-sent-messages [flags]
+    ex. chatd q chat show-sent-messages --from alice
+
+List all messages sent from user's wallet address:
+    chatd query chat show-inbox-messages [flags]
+    ex. chatd q chat show-inbox-messages --from alice
+
+Send a message to a group chat:
+    chatd tx chat send-group [content] [gid] [flags]
+    ex. chatd tx chat send-group 'Hi, everybody' 5 --from Bob
+
+List all message from a group:
+    chatd query chat show-group-messages [gid]
+    chatd q chat show-group-messages 5

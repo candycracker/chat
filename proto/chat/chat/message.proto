@@ -1,0 +1,14 @@
+syntax = "proto3";
+package chat.chat;
+
+import "gogoproto/gogo.proto";
+option go_package = "chat/x/chat/types";
+
+message Message {
+  
+  string sender = 1; 
+  string recipient = 2; 
+  string createdAt = 3; 
+  string content = 4; 
+  uint64 id = 5; 
+}

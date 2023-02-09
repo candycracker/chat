@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package chat.chat;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "chat/chat/params.proto";
+import "chat/chat/message.proto";
+
+option go_package = "chat/x/chat/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/chat/chat/params";
+  
+  }
+  
+  // Queries a list of ShowSentMessages items.
+  rpc ShowSentMessages (QueryShowSentMessagesRequest) returns (QueryShowSentMessagesResponse) {
+    option (google.api.http).get = "/chat/chat/show_sent_messages";
+  
+  }
+  
+  // Queries a list of ShowInboxMessages items.
+  rpc ShowInboxMessages (QueryShowInboxMessagesRequest) returns (QueryShowInboxMessagesResponse) {
+    option (google.api.http).get = "/chat/chat/show_inbox_messages";
+  
+  }
+  
+  // Queries a list of ShowGroupMessage items.
+  rpc ShowGroupMessage (QueryShowGroupMessagesRequest) returns (QueryShowGroupMessagesResponse) {
+    option (google.api.http).get = "/chat/chat/show_group_message/{gid}";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryShowSentMessagesRequest {
+  string                                creator    = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryShowSentMessagesResponse {
+  repeated Message                                message    = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryShowInboxMessagesRequest {
+  string                                creator    = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryShowInboxMessagesResponse {
+  repeated Message                                message    = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryShowGroupMessagesRequest {
+  uint64                                gid        = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryShowGroupMessagesResponse {
+  repeated Message                                message    = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
